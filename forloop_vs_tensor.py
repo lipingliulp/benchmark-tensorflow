@@ -4,10 +4,28 @@ import time
 
 
 size = 1000
-a = tf.constant(np.random.rand(size))
-b = tf.constant(np.random.rand(size))
+npa = np.random.rand(size)
+npb = np.random.rand(size)
+
+a = tf.constant(npa)
+b = tf.constant(npb)
+
 a_list = tf.unpack(a)
 b_list = tf.unpack(b)
+
+npa_list = npa.tolist()
+npb_list = npb.tolist()
+
+
+
+# time of python list operation
+t0_start = time.clock()
+npc_list = list()
+for i in xrange(size):
+    npc_list.append(npa_list[i] + npb_list[i])
+npc0 = np.array(npc_list)
+t0_nplist = time.clock() - t0_start
+print("Numpy calculation with lists takes time %f seconds." % t0_nplist)
 
 # construct graph with list
 t1_start =  time.clock()
@@ -40,5 +58,6 @@ npc2 = session.run(c2)
 t4_calculation =  time.clock() - t4_start
 print("Execution of a graph with tensors takes time %f seconds." % t4_calculation)
 
+assert(np.sum(npc0 != npc1) == 0)
 assert(np.sum(npc1 != npc2) == 0)
 
