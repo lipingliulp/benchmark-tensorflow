@@ -1,7 +1,6 @@
 '''
 Computation time comparison: tensor calculation v.s. for-loop with list of tensors 
 Author: Li-Ping Liu 
-Project: https://github.com/aymericdamien/TensorFlow-Examples/
 '''
 
 from __future__ import print_function

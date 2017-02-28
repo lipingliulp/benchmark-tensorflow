@@ -1,6 +1,6 @@
 '''
-Will tensorflow combine two functions as one
-Example: tf.log(tf.sigmoid(x)) = - tf.nn.softplus(-x)
+Will tensorflow reuse operations. suppose z1 and z2 are both defined as z1 = tf.add(a, b) and  z2 = tf.add(a, b), will z2 use the 
+calculation result of z1? The answer is no.
 Author: Li-Ping Liu 
 '''
 
