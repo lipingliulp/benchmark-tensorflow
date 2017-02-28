@@ -1,5 +1,5 @@
 '''
-Will tensorflow combine two functions as one
+Will tensorflow merge two calculation nodes into one?
 Example: tf.log(tf.sigmoid(x)) = - tf.nn.softplus(-x)
 Author: Li-Ping Liu 
 '''
