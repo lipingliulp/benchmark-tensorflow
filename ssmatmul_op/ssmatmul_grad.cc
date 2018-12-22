@@ -3,6 +3,7 @@
 #include <cmath>
 #include <limits>
 #include <vector>
+#include <iostream>
 #include "tensorflow/core/framework/op_kernel.h"
 #include "tensorflow/core/framework/op.h"
 #include "tensorflow/core/framework/shape_inference.h"
@@ -44,8 +45,12 @@ class SSMatMulGradOp : public OpKernel {
 
                 if (indices(k1) == indices(k2)) {
                     output(k1) += matrix(k2) * grad_ij; 
+
+                    //std::cout << output(k1) << ' ' << matrix(k2) << '\n'; 
+
                     k1++;
                     k2++; 
+
                 } else if (indices(k1) < indices(k2)) {
                     k1++; 
                 } else if (indices(k1) > indices(k2)) {
@@ -80,6 +85,9 @@ class SSMatMulGradOp : public OpKernel {
             else
                 grad_ij = grad(slice_base2 + irow * nrows + jrow) + grad(slice_base2 + jrow * nrows + irow);
 
+
+            //std::cout << "Working on rows: "  << irow << ' ' << jrow << ' ' <<  grad_ij <<  '\n'; 
+
             row_add(matrix, indices, row_i_base, row_j_base, grad_ij, output, ncols); 
 
         }
@@ -103,7 +111,7 @@ class SSMatMulGradOp : public OpKernel {
                                                          &p_tensor));
         Tensor& output_tensor(*p_tensor);
 
-        auto grad = mat_tensor.flat<double>();
+        auto grad = grad_tensor.flat<double>();
         auto matrix = mat_tensor.flat<double>();
         auto indices = ind_tensor.flat<int>();
         auto output = output_tensor.flat<double>();

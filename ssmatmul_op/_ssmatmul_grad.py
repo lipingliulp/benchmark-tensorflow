@@ -19,5 +19,4 @@ def _ss_mat_mul_grad_cc(op, grad):
     :param grad: gradient with respect to the output of the `ssmat_mul` op.
     :return: gradients with respect to the input of `inner_product`.
     """
-    
-    return ssmatmul_mod.ss_mat_mul_grad(grad, op.inputs[0], op.inputs[1]), tf.zeros(op.inputs[1].shape)
+    return ssmatmul_mod.ss_mat_mul_grad(grad, op.inputs[0], op.inputs[1]), None
