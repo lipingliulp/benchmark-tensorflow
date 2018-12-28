@@ -33,14 +33,14 @@ REGISTER_OP("SSMatMul")
       }
 
       ShapeHandle output_shape;
-      //c->ReplaceDim(mat_shape, -1, c->Dim(mat_shape, -2), &output_shape);
+      c->ReplaceDim(mat_shape, -1, c->Dim(mat_shape, -2), &output_shape);
 
-      ShapeHandle all_but_last;
-      TF_RETURN_IF_ERROR(c->Subshape(mat_shape, 0, -1, &all_but_last));
+      //ShapeHandle all_but_last;
+      //TF_RETURN_IF_ERROR(c->Subshape(mat_shape, 0, -1, &all_but_last));
 
-      DimensionHandle row_dim = c->Dim(mat_shape, -2);
-      ShapeHandle num_rows = c->Vector(row_dim);
-      TF_RETURN_IF_ERROR(c->Concatenate(all_but_last, num_rows, &output_shape));
+      //DimensionHandle row_dim = c->Dim(mat_shape, -2);
+      //ShapeHandle num_rows = c->Vector(row_dim);
+      //TF_RETURN_IF_ERROR(c->Concatenate(all_but_last, num_rows, &output_shape));
 
       c->set_output(0, output_shape);
 

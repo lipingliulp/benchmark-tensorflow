@@ -3,3 +3,7 @@
 
 # libraries
 *.so
+
+# directories
+__pycache__
+

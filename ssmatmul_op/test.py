@@ -84,6 +84,8 @@ if __name__ == '__main__':
     #tf_matmul_1 = tf.matmul(tf_values, tf_values, transpose_b=True)
     tf_matmul_2 = mod.ss_mat_mul(tf_values, tf_colind)
 
+    print(tf_matmul_1.get_shape())
+    print(tf_matmul_2.get_shape())
 
     tf_rand_mat = tf.constant(np.random.random_sample([nslice, nrow, nrow]), dtype=tf.float64)
 
@@ -109,7 +111,6 @@ with tf.Session() as sess:
 
 value_diff1 = np.sum(np.abs(matmul1 - np_matmul))
 value_diff2 = np.sum(np.abs(matmul2 - np_matmul))
-
 
 
 print('Value differences are %f and %f' % (value_diff1, value_diff2))
